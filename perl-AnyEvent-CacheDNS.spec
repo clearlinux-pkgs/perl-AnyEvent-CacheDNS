@@ -4,19 +4,16 @@
 #
 Name     : perl-AnyEvent-CacheDNS
 Version  : 0.08
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/liba/libanyevent-cachedns-perl/libanyevent-cachedns-perl_0.08-2.debian.tar.xz
 Summary  : 'Simple DNS resolver with caching'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-AnyEvent-CacheDNS-license
-Requires: perl-AnyEvent-CacheDNS-man
-Requires: perl(AnyEvent)
-Requires: perl(Module::Build)
+Requires: perl-AnyEvent-CacheDNS-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(AnyEvent)
-BuildRequires : perl(Module::Build)
 
 %description
 AnyEvent::CacheDNS
@@ -24,6 +21,15 @@ AnyEvent::CacheDNS
 *******************************************************************************
 This CPAN package provides a simple DNS resolver that caches the results for a
 faster retrieval for subsequent calls.
+
+%package dev
+Summary: dev components for the perl-AnyEvent-CacheDNS package.
+Group: Development
+Provides: perl-AnyEvent-CacheDNS-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-AnyEvent-CacheDNS package.
+
 
 %package license
 Summary: license components for the perl-AnyEvent-CacheDNS package.
@@ -33,19 +39,11 @@ Group: Default
 license components for the perl-AnyEvent-CacheDNS package.
 
 
-%package man
-Summary: man components for the perl-AnyEvent-CacheDNS package.
-Group: Default
-
-%description man
-man components for the perl-AnyEvent-CacheDNS package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n AnyEvent-CacheDNS-0.08
-mkdir -p %{_topdir}/BUILD/AnyEvent-CacheDNS-0.08/deblicense/
+cd ..
+%setup -q -T -D -n AnyEvent-CacheDNS-0.08 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/AnyEvent-CacheDNS-0.08/deblicense/
 
 %build
@@ -63,12 +61,12 @@ fi
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-AnyEvent-CacheDNS
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-AnyEvent-CacheDNS/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-AnyEvent-CacheDNS
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-AnyEvent-CacheDNS/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -77,12 +75,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/AnyEvent/CacheDNS.pm
+/usr/lib/perl5/vendor_perl/5.26.1/AnyEvent/CacheDNS.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-AnyEvent-CacheDNS/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/AnyEvent::CacheDNS.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-AnyEvent-CacheDNS/deblicense_copyright
