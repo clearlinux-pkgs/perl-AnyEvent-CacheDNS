@@ -1,2 +1,3 @@
 0.08
 perl(AnyEvent)
+perl(Module::Build)
