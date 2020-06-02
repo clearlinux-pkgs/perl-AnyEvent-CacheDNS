@@ -4,7 +4,7 @@
 #
 Name     : perl-AnyEvent-CacheDNS
 Version  : 0.08
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/liba/libanyevent-cachedns-perl/libanyevent-cachedns-perl_0.08-2.debian.tar.xz
@@ -99,4 +99,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/AnyEvent/CacheDNS.pm
+/usr/lib/perl5/vendor_perl/5.30.3/AnyEvent/CacheDNS.pm
