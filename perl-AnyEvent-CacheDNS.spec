@@ -4,7 +4,7 @@
 #
 Name     : perl-AnyEvent-CacheDNS
 Version  : 0.08
-Release  : 18
+Release  : 19
 URL      : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PO/POTYL/AnyEvent-CacheDNS-0.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/liba/libanyevent-cachedns-perl/libanyevent-cachedns-perl_0.08-2.debian.tar.xz
